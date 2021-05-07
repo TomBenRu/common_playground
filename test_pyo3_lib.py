@@ -1,4 +1,5 @@
 import math_func_rs
+from random import random
 import timeit
 
 
@@ -25,12 +26,31 @@ def sieve_of_eratosthenes(n):
     return res
 
 
+def pi_schnee(anz_flocken: int) -> float:
+    radius = 1
+    im_kreis = 0
+    for _ in range(anz_flocken):
+        x, y = (random() * 2) - radius, (random() * 2) - radius
+        if x ** 2 + y ** 2 < radius ** 2:
+            im_kreis += 1
+    return (2 * radius) ** 2 / (anz_flocken / im_kreis)
+
+
 nr = 10000
 print(math_func_rs.sieve(nr))
 print(sieve_of_eratosthenes(nr))
 t_rs = timeit.timeit(lambda: math_func_rs.sieve(max_nr=nr), number=1000)
 print(f'Zeit Rust-Lib: {t_rs}')
 t_py = timeit.timeit(lambda: sieve_of_eratosthenes(nr), number=1000)
+print(f'Zeit pure Python: {t_py}')
+print('-' * 40)
+print(f'The Rust-Extension is about {t_py/t_rs:.2f} times faster!')
+print('#' * 40)
+print(f'Pi in Pure Python: {pi_schnee(1000000)}')
+print(f'Pi with Rust-Extension: {math_func_rs.pi_schnee(1000000)}')
+t_rs = timeit.timeit(lambda: math_func_rs.pi_schnee(1000000), number=1)
+print(f'Zeit Rust-Extension: {t_rs}')
+t_py = timeit.timeit(lambda: pi_schnee(1000000), number=1)
 print(f'Zeit pure Python: {t_py}')
 print('-' * 40)
 print(f'The Rust-Extension is about {t_py/t_rs:.2f} times faster!')
