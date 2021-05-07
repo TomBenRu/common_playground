@@ -37,6 +37,7 @@ def pi_schnee(anz_flocken: int) -> float:
 
 
 nr = 10000
+pi_nr = 10000000
 print(math_func_rs.sieve(nr))
 print(sieve_of_eratosthenes(nr))
 t_rs = timeit.timeit(lambda: math_func_rs.sieve(max_nr=nr), number=1000)
@@ -46,11 +47,11 @@ print(f'Zeit pure Python: {t_py}')
 print('-' * 40)
 print(f'The Rust-Extension is about {t_py/t_rs:.2f} times faster!')
 print('#' * 40)
-print(f'Pi in Pure Python: {pi_schnee(1000000)}')
-print(f'Pi with Rust-Extension: {math_func_rs.pi_schnee(1000000)}')
-t_rs = timeit.timeit(lambda: math_func_rs.pi_schnee(1000000), number=1)
+print(f'Pi with Rust-Extension: {math_func_rs.pi_schnee(pi_nr)}')
+print(f'Pi in Pure Python:      {pi_schnee(pi_nr)}')
+t_rs = timeit.timeit(lambda: math_func_rs.pi_schnee(pi_nr), number=1)
 print(f'Zeit Rust-Extension: {t_rs}')
-t_py = timeit.timeit(lambda: pi_schnee(1000000), number=1)
+t_py = timeit.timeit(lambda: pi_schnee(pi_nr), number=1)
 print(f'Zeit pure Python: {t_py}')
 print('-' * 40)
 print(f'The Rust-Extension is about {t_py/t_rs:.2f} times faster!')
