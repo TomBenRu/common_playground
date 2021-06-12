@@ -56,4 +56,5 @@ print(f'Zeit pure Python: {t_py}')
 print('-' * 40)
 print(f'The Rust-Extension is about {t_py/t_rs:.2f} times faster!')
 
+print('-' * 40)
 print(f'The GgT of the Numbers [210, 63, 28, 42, 84] is: {math_func_rs.find_multi_ggt([210, 63, 28, 42, 84])}')
